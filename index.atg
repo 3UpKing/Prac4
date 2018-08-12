@@ -1,0 +1,23 @@
+COMPILER Index  $CN
+/* Simple index grammar defenition 
+    Chifamba, Ngwarai, Mutowo, Chiyoka */
+
+CHARACTERS
+  digit      = "0123456789" .
+  letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" .
+  symbol = "+-"
+
+TOKENS
+   title = {letters } .
+   pageNumber = {digit} | {digit}, {digit} | {digit} "-" {digit} .
+   
+   
+   
+  
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Index       = { Line } EOF .
+  Line = 	Title  
+END Index.
