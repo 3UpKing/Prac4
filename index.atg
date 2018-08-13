@@ -5,10 +5,9 @@ COMPILER Index  $CN
 CHARACTERS
   digit      = "0123456789" .
   letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" .
-  symbol = "+-"
 
 TOKENS
-   title = {letters } .
+   title = {letters | digit} .
    pageNumber = {digit} | {digit}, {digit} | {digit} "-" {digit} .
    
    
@@ -19,5 +18,7 @@ IGNORE CHR(0) .. CHR(31)
 
 PRODUCTIONS
   Index       = { Line } EOF .
-  Line = 	Title  
+  Line = 	Title [PageNumber] [Reference] [Appendix] .
+  Title = {title} [","] .
+  
 END Index.
