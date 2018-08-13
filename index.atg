@@ -1,5 +1,5 @@
 COMPILER Index  $CN
-/* Simple index grammar defenition 
+/* Simple index grammar definition 
     Chifamba, Ngwarai, Mutowo, Chiyoka */
 
 CHARACTERS
@@ -7,8 +7,9 @@ CHARACTERS
   letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" .
 
 TOKENS
-   title = {letters | digit} .
-   pageNumber = {digit} | {digit}, {digit} | {digit} "-" {digit} .
+   words = letters {letters} .
+   numbers = digit | digit {digit} | {digit}"," {digit} | {digit} "-" {digit} .
+   
    
    
    
@@ -17,8 +18,11 @@ TOKENS
 IGNORE CHR(0) .. CHR(31)
 
 PRODUCTIONS
-  Index       = { Line } EOF .
-  Line = 	Title [PageNumber] [Reference] [Appendix] .
-  Title = {title} [","] .
+  Index       = Line EOF .
+  Line = 	[Title] [PageNumber] [Reference] [Appendix] .
+  Title = words [","] | words .
+  PageNumber = numbers [","] | numbers.
+  Reference = words {words} .
+  Appendix = ["--"] words {numbers} .
   
 END Index.
