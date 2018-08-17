@@ -7,8 +7,8 @@ CHARACTERS
   letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-+" .
 
 TOKENS
-   title = letters {letters | digit} .
-   pageNumber = digit {digit} | digit {digit} "," {digit} | digit {digit} "-" {digit} .  
+   word = letters {letters | digit} .
+   pageNumber = digit {digit} [ "-" digit {digit} ] .  
    
    
   
@@ -17,10 +17,8 @@ IGNORE CHR(0) .. CHR(31)
 
 PRODUCTIONS
   Index       = { Line } EOF .  
-  Line = 	Title [PageNumber] [Appendix] .  
-  Title = {title} ["(" {title} ")"] [","] .
-  PageNumber = {pageNumber} .
-  Appendix = {title} {pageNumber} .
- 
+  Line = 	Title { PageNumber [","] } .  
+  Title = (word {word } [","]) | ( "(" {word} ")" ) .
+  PageNumber = pageNumber {pageNumber} . 
  
 END Index.
